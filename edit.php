@@ -11,9 +11,10 @@ if(isset ($_POST['name']) && isset($_POST['email'])) {
     
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $sql = 'UPDATE users SET name=:name, email=:email WHERE id=:id';
+    $today = date("Y-m-d H:i:s");
+    $sql = 'UPDATE users SET name=:name, email=:email, updated_at=:today WHERE id=:id';
     $statement = $connection -> prepare($sql);
-    if($statement-> execute([':name' => $name, ':email' => $email, ':id' => $id])) {
+    if($statement-> execute([':name' => $name, ':email' => $email, ':today' => $today,  ':id' => $id])) {
         header("Location: index.php");
     }
     
